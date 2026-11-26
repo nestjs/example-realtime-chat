@@ -8,7 +8,7 @@ import { Test } from '@nestjs/testing';
 import { drizzle } from 'drizzle-orm/pglite';
 import { migrate } from 'drizzle-orm/pglite/migrator';
 import { io, type Socket } from 'socket.io-client';
-import { AppModule } from '../src/app.module.js';
+import { AppModule, ObserveInstrument } from '../src/app.module.js';
 
 describe('Chat (e2e)', () => {
   const pglite = new PGlite(); // PostgreSQL in-process: no server to start
@@ -19,7 +19,11 @@ describe('Chat (e2e)', () => {
   beforeAll(async () => {
     const db = drizzle({ client: pglite });
     await migrate(db, { migrationsFolder: fileURLToPath(new URL('../drizzle', import.meta.url)) });
-    const moduleRef = await Test.createTestingModule({ imports: [AppModule] })
+    // Instrumented as in main.ts, so NestJS Observe sees the gateway's handlers.
+    const moduleRef = await Test.createTestingModule(
+      { imports: [AppModule] },
+      { instrument: ObserveInstrument },
+    )
       .overrideProvider(getDrizzleToken())
       .useValue(db)
       // scrypt at the default cost takes 128 MiB and a few hundred ms per hash.

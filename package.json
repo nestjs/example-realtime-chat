@@ -48,7 +48,7 @@
     "@types/pg": "^8.23.1",
     "drizzle-kit": "^1.0.0-rc.5",
     "socket.io-client": "^4.8.4",
-    "typescript": "^6.0.2",
+    "typescript": "^7.0.0",
     "vite": "^8.3.8",
     "vitest": "^5.1.1"
   },

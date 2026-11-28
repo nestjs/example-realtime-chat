@@ -44,7 +44,7 @@
     "@nestjs/cli": "^12.0.0",
     "@nestjs/schematics": "^12.0.0",
     "@nestjs/testing": "^12.6.3",
-    "@types/node": "^24.0.0",
+    "@types/node": "^26.0.0",
     "@types/pg": "^8.23.1",
     "drizzle-kit": "^1.0.0-rc.5",
     "socket.io-client": "^4.8.4",
